@@ -47,12 +47,12 @@ with `meow`:
   :config
   (key-once-create "undo"
     :repeat
-    '(("u" . undo-tree-undo)
-      ("r" . undo-tree-redo)
-      ("s" . undo-tree-save-history)
-      ("l" . undo-tree-load-history))
+    '((("u" . "undo") . undo-tree-undo)
+      (("r" . "rero") . undo-tree-redo)
+      (("s" . "save") . undo-tree-save-history)
+      (("l" . "load") . undo-tree-load-history))
     :quit
-    '(("v" . undo-tree-visualize)))
+    '((("v" . "visualize") . undo-tree-visualize)))
   (meow-leader-define-key '("u" . key-once-menu-undo)))
 ```
 
