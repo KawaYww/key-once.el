@@ -4,6 +4,7 @@
 Think of it as a lightweight alternative to `transient`, `hydra`, or `repeat-mode`, but just simpler.  
 
 This package is designed to be integrated with other modal-editing package, like `general`, `meow`.  
+(WIP)
 
 # Installation
 
