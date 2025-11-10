@@ -59,7 +59,7 @@
 
 
 
-(defun key-once--string-to-slug (str &optional allow-unicode)
+(defun key-once--string-to-slug (str)
   "Convert STR to a URL-friendly slug.
 If ALLOW-UNICODE is non-nil, allow Unicode letters and numbers.
 Otherwise, only allow ASCII alphanumerics.
@@ -71,12 +71,7 @@ Examples:
     (let* ((pattern (if allow-unicode
                         "[^\\p{L}\\p{N}]+"  ; Unicode letters and numbers
                       "[^a-zA-Z0-9]+"))     ; ASCII only
-           (sanitized
-            (replace-regexp-in-string
-             pattern "-"
-             (if allow-unicode
-                 str
-               (downcase str)))))
+           (sanitized (replace-regexp-in-string pattern "-" (downcase str))))
       ;; Remove leading/trailing hyphens and collapse multiple hyphens
       (replace-regexp-in-string "^-+\\|-+$" ""
         (replace-regexp-in-string "-+" "-" sanitized)))))
@@ -170,9 +165,3 @@ ARGS accepts keyword arguments:
 (provide 'key-once)
 
 ;;; key-once.el ends here
-(defun a_func () (interactive) (message "A executed")) 
-
-(key-once-create "demo asasd"
-  :repeat '(("a" . a_func)
-            ("b" . (lambda () (interactive) (message "B executed"))))
-  :quit '(("c" . (lambda () (interactive) (message "C executed")))))
