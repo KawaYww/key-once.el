@@ -3,23 +3,13 @@
 
 ;; Author: Your Name <kawayww@gmail.com>
 ;; Version: 0.0.1
-;; Package-Requires: ((emacs "26.1"))
-;; Keywords: convenience, keys, keybindings
+;; Package-Requires: ((emacs "30.0"))
+;; Keywords: convenience, keys, keybindings, editing
 ;; URL: https://github.com/kawayww/key-once.el
 
 ;;; Commentary:
 
-;; Key-once allows you to create commands that activate transient keymaps
-;; for repeated command execution.
-;;
-;; Basic usage:
-;;   (key-once-create "undo" 
-;;     :continue '((\"k\" . undo-only)
-;;                 (\"j\" . undo-redo)))
-;;
-;; This creates `key-once-undo' command that you can bind to a key.
-;; When activated, pressing 'k' will call undo-only, and you can press
-;; 'k' repeatedly to undo multiple times.
+;; Key-once allows you to create commands that activate transient keymaps for repeated command execution.
 
 ;;; Code:
 
@@ -56,8 +46,6 @@
     (setq which-key-persistent-popup nil))
   (when (fboundp 'which-key--hide-popup)
     (which-key--hide-popup)))
-
-
 
 (defun key-once--string-to-slug (str)
   "Convert STR to a URL-friendly slug.
@@ -159,6 +147,7 @@ ARGS accepts keyword arguments:
 (defun key-once-active-p ()
   "Return non-nil if a key-once menu is currently active."
   key-once--active-p)
+
 
 (provide 'key-once)
 
