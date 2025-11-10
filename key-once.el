@@ -68,9 +68,7 @@ Examples:
   (string-to-slug \"测试 Test 123\") -> \"test-123\"
   (string-to-slug \"测试 Test 123\" t) -> \"测试-test-123\""
   (when (stringp str)
-    (let* ((pattern (if allow-unicode
-                        "[^\\p{L}\\p{N}]+"  ; Unicode letters and numbers
-                      "[^a-zA-Z0-9]+"))     ; ASCII only
+    (let* ((pattern "[^[:alnum:][:multibyte:]]+")
            (sanitized (replace-regexp-in-string pattern "-" (downcase str))))
       ;; Remove leading/trailing hyphens and collapse multiple hyphens
       (replace-regexp-in-string "^-+\\|-+$" ""
