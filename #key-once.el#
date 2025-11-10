@@ -17,7 +17,7 @@
   "Create transient keymaps for repeated command execution."
   :group 'editing)
 
-(defcustom key-once-global-quit-key "q"
+(defcustom key-once-global-exit-key "q"
   "Key to exit the key-once menu."
   :type 'string
   :group 'key-once)
@@ -119,10 +119,9 @@ BINDINGS is a list of (KEY . COMMAND)."
             (quit-cmd (key-once--call (cdr pair) t)))
         (keymap-set map key `(,desc . ,quit-cmd))))
 
-    (when key-once-global-quit-key
-      (let ((desc (format "%s%s%s" key-once-quit-prefix "quit" key-once-quit-suffix))
-            (quit-cmd (key-once--call #'key-once--exit)))
-        (keymap-set map key-once-global-quit-key `(,desc . ,quit-cmd))))
+    (when key-once-global-exit-key
+      (let ((quit-cmd (key-once--call #'key-once--exit)))
+        (keymap-set map key-once-global-exit-key quit-cmd)))
 
     map))
 
@@ -179,16 +178,16 @@ ARGS accepts keyword arguments:
 
 ;;; key-once.el ends here
 
-; (defun a-func () (interactive) (message "A executed"))  
-; (defun b-func () (interactive) (message "B executed"))
+(defun a-func () (interactive) (message "A executed"))  
+(defun b-func () (interactive) (message "B executed"))
 
-; (key-once-create "uundo"
-;   :repeat
-;   '((("u" . "undo") . a-func)
-;     ; ("r" . undo-tree-redo)
-;     ; ("s" . undo-tree-save-history)
-;     (("l" . "load") . b-func))
-  
-;   ; :quit
-;   ; '(("v" . undo-tree-visualize))
-;     )
+(key-once-create "uundo"
+		 :repeat
+		 '((("u" . "undo") . a-func)
+					; ("r" . undo-tree-redo)
+					; ("s" . undo-tree-save-history)
+		   (("l" . "load") . b-func))
+		 
+					; :quit
+					; '(("v" . undo-tree-visualize))
+		 )
