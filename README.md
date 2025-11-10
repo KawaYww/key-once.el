@@ -6,7 +6,7 @@ Think of it as a lightweight alternative to `transient`, `hydra`, or `repeat-mod
 This package is designed to be integrated with other modal-editing package, like `general`, `meow`.  
 (WIP)
 
-# Installation
+## Installation
 
 - manually: clone this repo, add the full path of it to your `load-path`, and then:
 
@@ -30,7 +30,7 @@ This package is designed to be integrated with other modal-editing package, like
   :straight (key-once :type git :host github :repo "kawayww/key-once.el"))
 ```
 
-# Examples
+## Examples
 
 with `meow`:
 
@@ -42,12 +42,18 @@ with `meow`:
   :straight t
   :init (global-undo-tree-mode)
   :after meow key-once
+  :custom
+  (undo-tree-auto-save-history nil)
   :config
   (key-once-create "undo"
+    :repeat
     '(("u" . undo-tree-undo)
       ("r" . undo-tree-redo)
       ("s" . undo-tree-save-history)
-      ("l" . undo-tree-load-history)
-      ("v" . undo-tree-visualize)))
+      ("l" . undo-tree-load-history))
+    :quit
+    '(("v" . undo-tree-visualize)))
   (meow-leader-define-key '("u" . key-once-menu-undo)))
 ```
+
+## Configuration
